@@ -1,0 +1,19 @@
+models:
+  - name: src_movies
+    config:
+      materialized: table
+  - name: src_links
+    config:
+      materialized: table
+  - name: src_tags
+    config:
+      materialized: table
+  - name: src_ratings
+    config:
+      materialized: table
+  - name: src_genome_tags
+    config:
+      materialized: table
+  - name: src_genome_scores
+    config:
+      materialized: table
