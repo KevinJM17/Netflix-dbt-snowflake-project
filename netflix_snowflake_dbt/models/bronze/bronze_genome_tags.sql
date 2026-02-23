@@ -1,10 +1,11 @@
-{{ config(materialized='incremental') }}
+with bronze_genome_tags as (
+    select
+        tagId as tag_id,
+        trim(tag) as tag,
+        current_timestamp() as _loaded_at
+    from {{ source('raw', 'raw_genome_tags') }}
+    where tag_id is not null 
+        and tag is not null
+)
 
-select
-    tagId as tag_id,
-    tag
-from {{ source('raw', 'raw_genome_tags') }}
-
-{% if is_incremental() %}
-    where tagId > (select coalesce(max(tag_id), 0) from {{ this }})
-{% endif %}
+select * from bronze_genome_tags

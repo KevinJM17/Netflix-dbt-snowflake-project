@@ -1,11 +1,11 @@
-{{ config(materialized='incremental') }}
+with bronze_links as (
+    select 
+        movieId as movie_id,
+        imdbId as imdb_id,
+        tmdbId as tmdb_id,
+        current_timestamp() as _loaded_at
+    from {{ source('raw', 'raw_links') }}
+    where movie_id is not null 
+)
 
-select 
-    movieId as movie_id,
-    imdbId as imdb_id,
-    tmdbId as tmdb_id
-from {{ source('raw', 'raw_links') }}
-
-{% if is_incremental() %}
-    where movieId > (select coalesce(max(movie_id), 0) from {{ this }})
-{% endif %}
+select * from bronze_links
