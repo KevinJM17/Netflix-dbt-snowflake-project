@@ -33,5 +33,8 @@ models:
   netflix_snowflake_dbt:
     # Config indicated by + and applies to all files under models/example/
     bronze:
-      +materialized: table
       +schema: bronze
+      +materialized: view
+    silver:
+      +schema: silver
+      +materialized: ephemeral
