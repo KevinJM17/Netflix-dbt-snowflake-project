@@ -1,6 +1,6 @@
 with tags_deduped as (
     select *
-    from {{ ref("bronze_tags") }}
+    from {{ ref("stg_tags") }}
     qualify (row_number() over (partition by user_id, movie_id, tag order by tag_timestamp)) = 1
 ), genome_lookup as (
     select 
@@ -8,8 +8,8 @@ with tags_deduped as (
         gs.tag_id,
         lower(trim(regexp_replace(gt.tag, '[^a-zA-Z0-9]', ' '))) as tag,
         gs.relevance
-    from {{ ref("bronze_genome_tags") }} gt
-    join {{ ref("bronze_genome_scores") }} gs 
+    from {{ ref("stg_genome_tags") }} gt
+    join {{ ref("stg_genome_scores") }} gs 
         on gt.tag_id = gs.tag_id
 ), tags_with_genome as (
     select 

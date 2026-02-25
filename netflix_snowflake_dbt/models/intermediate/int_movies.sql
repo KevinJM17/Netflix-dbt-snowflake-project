@@ -6,7 +6,7 @@ with movies_rn as (
         split(genres, '|') as genres,
         _loaded_at,
         row_number() over (partition by title order by _loaded_at desc) as rn
-    from {{ ref("bronze_movies") }}
+    from {{ ref("stg_movies") }}
 ), movies_deduped as (
     select *
     from movies_rn
@@ -29,5 +29,5 @@ select
     l.imdb_id,
     l.tmdb_id
 from movies_genres m
-left join {{ ref("bronze_links") }} l 
+left join {{ ref("stg_links") }} l 
     on m.movie_id = l.movie_id

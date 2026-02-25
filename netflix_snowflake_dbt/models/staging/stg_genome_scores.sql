@@ -1,4 +1,4 @@
-with bronze_genome_scores as (
+with stg_genome_scores as (
     select 
         movieId as movie_id,
         tagId as tag_id,
@@ -11,4 +11,4 @@ with bronze_genome_scores as (
         and relevance > 0.01
 )
 
-select * from bronze_genome_scores
+select * from stg_genome_scores

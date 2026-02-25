@@ -1,4 +1,4 @@
-with bronze_movies as (
+with stg_movies as (
     select 
         movieId as movie_id,
         trim(title) as title,
@@ -9,4 +9,4 @@ with bronze_movies as (
     where release_year != -1
 )
 
-select * from bronze_movies
+select * from stg_movies

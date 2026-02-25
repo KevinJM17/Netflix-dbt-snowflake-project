@@ -1,6 +1,6 @@
 {{ config(materialized='incremental') }}
 
-with bronze_ratings as (
+with stg_ratings as (
     select 
         movieId as movie_id,
         userId as user_id,
@@ -14,4 +14,4 @@ with bronze_ratings as (
     {% endif %}
 )
 
-select * from bronze_ratings
+select * from stg_ratings

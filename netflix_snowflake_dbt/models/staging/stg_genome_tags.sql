@@ -1,4 +1,4 @@
-with bronze_genome_tags as (
+with stg_genome_tags as (
     select
         tagId as tag_id,
         trim(tag) as tag,
@@ -8,4 +8,4 @@ with bronze_genome_tags as (
         and tag is not null
 )
 
-select * from bronze_genome_tags
+select * from stg_genome_tags

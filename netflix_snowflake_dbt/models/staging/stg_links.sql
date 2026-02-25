@@ -1,4 +1,4 @@
-with bronze_links as (
+with stg_links as (
     select 
         movieId as movie_id,
         imdbId as imdb_id,
@@ -8,4 +8,4 @@ with bronze_links as (
     where movie_id is not null 
 )
 
-select * from bronze_links
+select * from stg_links
