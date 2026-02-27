@@ -41,4 +41,4 @@ join movie_tags_agg m
     on t.movie_id = m.movie_id
     and t.tag = m.tag
 qualify (row_number() over (partition by t.movie_id, t.tag order by t.tag_timestamp)) = 1 
-order by 1
+order by 1 
